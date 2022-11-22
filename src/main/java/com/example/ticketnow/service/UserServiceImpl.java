@@ -13,13 +13,11 @@ import java.util.Optional;
 @Service
 public class UserServiceImpl implements UserService {
 
-
     private UserRepository userRepository;
 
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-
 
     public ValidationMessage validateUser(UserBO userBO) {
         Optional<User> optionalUser;
@@ -35,15 +33,17 @@ public class UserServiceImpl implements UserService {
 
             BeanUtils.copyProperties(user, recordInDatabase);
 
-            if(recordInDatabase.getPassword()!=null)
-                recordInDatabase.setPassword(Base64.getDecoder().decode(recordInDatabase.getPassword()).toString());
-
+            if(recordInDatabase.getPassword()!=null) {
+               String decodedPassword=
+                new String(Base64.getDecoder().decode(recordInDatabase.getPassword()));
+                recordInDatabase.setPassword(decodedPassword);
+            }
 
             if (userBO.equals(recordInDatabase)) {
                 return new ValidationMessage(true);
-            } else if (userBO.getUsername().equals(recordInDatabase.getUserId())) {
+            } else if (userBO.getUserId().equals(recordInDatabase.getUserId())) {
                 validationMessage = new ValidationMessage();
-                validationMessage.setUserValid(false);
+                validationMessage.setUserIdValid(false);
             } else if (userBO.getPassword().equals(recordInDatabase.getPassword())) {
                 validationMessage = new ValidationMessage();
                 validationMessage.setPasswordValid(false);

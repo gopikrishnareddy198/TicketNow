@@ -20,7 +20,7 @@ public class UserBO {
                 if (this == o) return true;
                 if (o == null || getClass() != o.getClass()) return false;
                 UserBO userBO = (UserBO) o;
-                return Objects.equals(userId, userBO.userId) && Objects.equals(password, userBO.password) && Objects.equals(roles, userBO.roles);
+                return Objects.equals(userId, userBO.userId) && Objects.equals(password, userBO.password);
         }
 
         @Override

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping(value = "/ticket-now/users")
+@RequestMapping(value = "/ticket-now/auth")
 public class UserController {
 
 
