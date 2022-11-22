@@ -21,7 +21,7 @@ public class SaveDataRunner implements CommandLineRunner {
     public void run(String... args) throws Exception {
         User user,user2;
         String ecodedPassword;
-        Set<String> rolesForGopi,rolesForKhomsun;
+      /*  Set<String> rolesForGopi,rolesForKhomsun;
 
         user=new User();
         user.setUserId("gxa30590");
@@ -48,9 +48,7 @@ public class SaveDataRunner implements CommandLineRunner {
 
 
         userRepository.save(user);
-        userRepository.save(user2);
-
-        System.out.println(Base64.getDecoder().decode(ecodedPassword.getBytes()));
+        userRepository.save(user2);*/
 
     }
 }
