@@ -12,6 +12,9 @@ public class ValidationMessage {
     private boolean usernameAndPasswordMatches;
     private boolean isPasswordValid;
     private boolean isUserIdValid;
+    private String username;
+    private String userId;
+
 
     public ValidationMessage(boolean usernameAndPasswordMatches) {
         this.usernameAndPasswordMatches = usernameAndPasswordMatches;

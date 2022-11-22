@@ -40,11 +40,15 @@ public class UserServiceImpl implements UserService {
             }
 
             if (userBO.equals(recordInDatabase)) {
-                return new ValidationMessage(true);
-            } else if (userBO.getUserId().equals(recordInDatabase.getUserId())) {
+                    validationMessage=new ValidationMessage(true);
+                    validationMessage.setUserId(recordInDatabase.getUserId());
+                    validationMessage.setUsername(recordInDatabase.getUsername());
+                    return validationMessage;
+            } else if (userBO.getUserId().equals(recordInDatabase.getUserId())==false) {
                 validationMessage = new ValidationMessage();
                 validationMessage.setUserIdValid(false);
-            } else if (userBO.getPassword().equals(recordInDatabase.getPassword())) {
+                validationMessage.setUserId(userBO.getUserId());
+            } else if (userBO.getPassword().equals(recordInDatabase.getPassword())==false) {
                 validationMessage = new ValidationMessage();
                 validationMessage.setPasswordValid(false);
             } else {
