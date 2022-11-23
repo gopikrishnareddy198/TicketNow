@@ -1,4 +1,4 @@
-package com.example.ticketnow.users.bo;
+package com.example.ticketnow.bo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;

@@ -1,14 +1,15 @@
 package com.example.ticketnow;
 
+import com.example.ticketnow.model.Ticket;
+import com.example.ticketnow.repo.TicketRepository;
 import com.example.ticketnow.repo.UserRepository;
-import com.example.ticketnow.users.model.User;
+import com.example.ticketnow.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import java.util.Base64;
-import java.util.HashSet;
-import java.util.Set;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Component
 public class SaveDataRunner implements CommandLineRunner {
@@ -16,9 +17,11 @@ public class SaveDataRunner implements CommandLineRunner {
 
     @Autowired  private UserRepository userRepository;
 
+    @Autowired private TicketRepository ticketRepository;
 
     @Override
     public void run(String... args) throws Exception {
+        Ticket ticket;
         User user,user2;
         String ecodedPassword;
       /*  Set<String> rolesForGopi,rolesForKhomsun;
@@ -50,5 +53,16 @@ public class SaveDataRunner implements CommandLineRunner {
         userRepository.save(user);
         userRepository.save(user2);*/
 
+
+        ticket=new Ticket();
+        ticket.setCreationTime(LocalDateTime.now());
+        ticket.setCreationDate(LocalDate.now());
+        ticket.setIDof_createdBy("gxa30590");
+
+        ticket.setDescription("Having issues while trying to swipe the ID Card at the entrance gate");
+        ticket.setTitle("Id card not working");
+        ticket.setStatus("NEW");
+
+        ticketRepository.save(ticket);
     }
 }

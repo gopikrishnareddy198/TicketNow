@@ -1,9 +1,9 @@
 package com.example.ticketnow.service;
 
 import com.example.ticketnow.repo.UserRepository;
-import com.example.ticketnow.users.bo.UserBO;
-import com.example.ticketnow.users.model.User;
-import com.example.ticketnow.users.model.ValidationMessage;
+import com.example.ticketnow.bo.UserBO;
+import com.example.ticketnow.model.User;
+import com.example.ticketnow.model.ValidationMessage;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 

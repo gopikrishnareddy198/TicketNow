@@ -2,9 +2,8 @@ package com.example.ticketnow.controller;
 
 
 import com.example.ticketnow.service.UserService;
-import com.example.ticketnow.service.UserServiceImpl;
-import com.example.ticketnow.users.bo.UserBO;
-import com.example.ticketnow.users.model.ValidationMessage;
+import com.example.ticketnow.bo.UserBO;
+import com.example.ticketnow.model.ValidationMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

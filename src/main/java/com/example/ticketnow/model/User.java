@@ -1,4 +1,4 @@
-package com.example.ticketnow.users.model;
+package com.example.ticketnow.model;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
