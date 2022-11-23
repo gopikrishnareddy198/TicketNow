@@ -2,23 +2,21 @@ package com.example.ticketnow.model;
 
 
 import lombok.Data;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.Id;
-import java.sql.Time;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Data
 @Document(value = "comments")
-public class Comments {
+public class Comment {
 
     @Id
     private String id;
     private String comment;
-    private String idOfTheUserWhoCommentedIt;
     private String nameOfTheUserWhoCommented;
+    private String idOfTheUserWhoCommentedIt;
 
-    private Timestamp commentedAt;
-
+    private LocalDateTime commentedAt;
 
 }

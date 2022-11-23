@@ -1,19 +1,27 @@
 package com.example.ticketnow.service;
 
+import com.example.ticketnow.bo.TikcetBO;
 import com.example.ticketnow.model.Ticket;
 import com.example.ticketnow.repo.TicketRepository;
+import com.example.ticketnow.util.TicketStatus;
+import com.fasterxml.jackson.databind.util.BeanUtil;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class TicketServiceImpl implements TicketService {
 
+    @Autowired
     private TicketRepository ticketRepository;
 
     private MongoTemplate mongoTemplate;
@@ -39,4 +47,23 @@ public class TicketServiceImpl implements TicketService {
         tickets = mongoTemplate.find(query, Ticket.class);
         return tickets;
     }
+
+    @Override
+    public Ticket addATicket(TikcetBO tikcetBO) {
+        Ticket ticket;
+
+        ticket = new Ticket();
+
+        BeanUtils.copyProperties(tikcetBO, ticket);
+
+        ticket.setCreationTime(LocalDateTime.now());
+        ticket.setCreationDate(LocalDate.now());
+
+        ticket.setStatus(String.valueOf(TicketStatus.NEW));
+
+        return ticketRepository.save(ticket);
+
+    }
+
+
 }
