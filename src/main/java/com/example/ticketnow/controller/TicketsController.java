@@ -33,21 +33,21 @@ public class TicketsController {
         String userId;
         List<Ticket> tickets;
         String requestBody;
-        //userId=servletRequest.getHeader("userid");
+        userId=servletRequest.getHeader("userid");
 
-        try {
+    /*    try {
             requestBody = servletRequest.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
             userId = requestBody.substring((requestBody.length() - "userid:".length()) - 1);
-            tickets = ticketService.fetchAllTicketsUsingUserId(userId);
 
-            return new ResponseEntity<List<Ticket>>(tickets, HttpStatus.OK);
 
             //servletRequest.getInputStream().readAllBytes();
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
+        tickets = ticketService.fetchAllTicketsUsingUserId(userId);
 
-        return new ResponseEntity<List<Ticket>>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<List<Ticket>>(tickets, HttpStatus.OK);
+     //   return new ResponseEntity<List<Ticket>>(HttpStatus.NOT_FOUND);
 
     }
 
