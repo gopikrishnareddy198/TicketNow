@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Id;
 import java.sql.Time;
+import java.sql.Timestamp;
 
 @Data
 @Document(value = "comments")
@@ -17,9 +18,7 @@ public class Comments {
     private String idOfTheUserWhoCommentedIt;
     private String nameOfTheUserWhoCommented;
 
-    private Time commentedAt;
-
-
+    private Timestamp commentedAt;
 
 
 }

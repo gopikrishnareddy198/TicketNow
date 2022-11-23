@@ -1,5 +1,6 @@
 package com.example.ticketnow;
 
+import com.example.ticketnow.model.Comments;
 import com.example.ticketnow.model.Ticket;
 import com.example.ticketnow.repo.TicketRepository;
 import com.example.ticketnow.repo.UserRepository;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class SaveDataRunner implements CommandLineRunner {
@@ -24,6 +27,7 @@ public class SaveDataRunner implements CommandLineRunner {
         Ticket ticket;
         User user,user2;
         String ecodedPassword;
+        List<Comments> commentsList;
       /*  Set<String> rolesForGopi,rolesForKhomsun;
 
         user=new User();
@@ -57,11 +61,16 @@ public class SaveDataRunner implements CommandLineRunner {
         ticket=new Ticket();
         ticket.setCreationTime(LocalDateTime.now());
         ticket.setCreationDate(LocalDate.now());
-        ticket.setIDof_createdBy("gxa30590");
+        ticket.setIDof_createdBy("sxa30590");
 
-        ticket.setDescription("Having issues while trying to swipe the ID Card at the entrance gate");
-        ticket.setTitle("Id card not working");
+        ticket.setDescription("This is description 2");
+        ticket.setTitle("Title 2");
         ticket.setStatus("NEW");
+
+        commentsList=new ArrayList<>();
+
+        commentsList.add()
+
 
         ticketRepository.save(ticket);
     }

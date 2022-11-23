@@ -30,6 +30,7 @@ public class Ticket {
     private String IDof_assignedTo;
 
     private List<String> idOfComment;
+    private String category;
 
     @Transient
     public static final String SEQUENCE_NAME="ticket_sequence";
