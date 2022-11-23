@@ -53,14 +53,17 @@ public class TicketsController {
 
 
     @PostMapping(value = "/add-new-ticket")
-    public ResponseEntity<List<Ticket>> createTicket(@RequestBody TikcetBO ticketBO) {
+    public ResponseEntity<String> createTicket(@RequestBody TikcetBO ticketBO) {
 
         ResponseEntity responseEntity;
-
-        if (ticketService.addATicket(ticketBO) == null) {
+        Ticket ticket=
+        ticketService.addATicket(ticketBO);
+        if (ticket == null) {
             responseEntity = new ResponseEntity(HttpStatus.NOT_MODIFIED);
         } else
-            responseEntity = new ResponseEntity(ticketService.fetchAllTicketsUsingUserId(ticketBO.getIDof_createdBy()), HttpStatus.OK);
+            responseEntity = new ResponseEntity(ticket.getTicketId(), HttpStatus.OK);
+
+
         return responseEntity;
     }
 
