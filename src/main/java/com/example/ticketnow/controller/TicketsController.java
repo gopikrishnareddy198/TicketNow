@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/ticket-now")
+@CrossOrigin("*")
 public class TicketsController {
 
     private TicketService ticketService;
@@ -30,7 +31,7 @@ public class TicketsController {
         String userId;
         List<Ticket> tickets;
         String requestBody;
-        userId=servletRequest.getHeader("userid");
+        userId = servletRequest.getHeader("userid");
 
     /*    try {
             requestBody = servletRequest.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
@@ -44,7 +45,7 @@ public class TicketsController {
         tickets = ticketService.fetchAllTicketsUsingUserId(userId);
 
         return new ResponseEntity<List<Ticket>>(tickets, HttpStatus.OK);
-     //   return new ResponseEntity<List<Ticket>>(HttpStatus.NOT_FOUND);
+        //   return new ResponseEntity<List<Ticket>>(HttpStatus.NOT_FOUND);
 
     }
 
@@ -53,8 +54,8 @@ public class TicketsController {
     public ResponseEntity<String> createTicket(@RequestBody TikcetBO ticketBO) {
 
         ResponseEntity responseEntity;
-        Ticket ticket=
-        ticketService.addATicket(ticketBO);
+        Ticket ticket =
+                ticketService.addATicket(ticketBO);
         if (ticket == null) {
             responseEntity = new ResponseEntity(HttpStatus.NOT_MODIFIED);
         } else
@@ -65,9 +66,20 @@ public class TicketsController {
     }
 
 
+    @DeleteMapping(value = "/delete-a-ticket")
+    public ResponseEntity<String> deleteTicket(@RequestHeader(value = "ticketId") String ticketId) {
+        boolean deleted;
+        deleted = ticketService.deleteTicket(ticketId);
+        if (deleted)
+            return new ResponseEntity<String>("Ticket Deleted Successfully", HttpStatus.OK);
+        else
+            return new ResponseEntity<>("Ticket Already Deleted", HttpStatus.GONE);
+    }
+
+
     @GetMapping(value = "/admin/fetch-all-tickets")
-    public ResponseEntity<List<Ticket>> getAllTickets(){
-       return new ResponseEntity<List<Ticket>>( ticketService.getAllTickets(),HttpStatus.OK);
+    public ResponseEntity<List<Ticket>> getAllTickets() {
+        return new ResponseEntity<List<Ticket>>(ticketService.getAllTickets(), HttpStatus.OK);
     }
 
 

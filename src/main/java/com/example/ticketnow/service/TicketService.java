@@ -10,4 +10,6 @@ public interface TicketService {
 
     Ticket    addATicket(TikcetBO tikcetBO);
     List<Ticket> getAllTickets();
+
+    boolean deleteTicket(String ticketId);
 }

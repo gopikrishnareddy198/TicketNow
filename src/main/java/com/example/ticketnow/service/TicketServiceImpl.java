@@ -65,6 +65,26 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public List<Ticket> getAllTickets() {
-       return ticketRepository.findAll();
+        return ticketRepository.findAll();
     }
+
+    @Override
+    public boolean deleteTicket(String ticketId) {
+        Ticket ticket;
+        boolean ticketDeleted = false;
+        ticket = new Ticket();
+        ticket.setTicketId(ticketId);
+        try {
+            if (ticketRepository.findByTicketId(ticketId) != null) {
+                ticketRepository.delete(ticket);
+                ticketDeleted = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return ticketDeleted;
+    }
+
+
 }
