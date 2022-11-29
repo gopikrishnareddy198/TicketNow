@@ -9,4 +9,5 @@ public interface TicketService {
     List<Ticket> fetchAllTicketsUsingUserId(String userId);
 
     Ticket    addATicket(TikcetBO tikcetBO);
+    List<Ticket> getAllTickets();
 }

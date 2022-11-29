@@ -8,10 +8,7 @@ import com.example.ticketnow.service.UserService;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -68,6 +65,10 @@ public class TicketsController {
     }
 
 
+    @GetMapping(value = "/admin/fetch-all-tickets")
+    public ResponseEntity<List<Ticket>> getAllTickets(){
+       return new ResponseEntity<List<Ticket>>( ticketService.getAllTickets(),HttpStatus.OK);
+    }
 
 
 }
