@@ -115,13 +115,12 @@ public class SaveDataRunner implements CommandLineRunner {
         comment4.setTicketId(ticket.getTicketId());
 
         ticket.setIdOfComment(List.of(commentsRepository.save(comment4).getId()));
-*/
 
         ticket=ticketRepository.findByTicketId("637f8f44e538430c002eb4e5");
 
         commentsDAO.getAllCommentsByTicketId(ticket.getTicketId()).forEach(System.out::println);
 
-
+*/
 
     }
 }
