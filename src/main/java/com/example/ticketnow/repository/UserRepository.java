@@ -1,4 +1,4 @@
-package com.example.ticketnow.repo;
+package com.example.ticketnow.repository;
 
 import com.example.ticketnow.model.User;
 import org.springframework.data.mongodb.repository.MongoRepository;

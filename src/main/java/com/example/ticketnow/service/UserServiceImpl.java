@@ -1,6 +1,6 @@
 package com.example.ticketnow.service;
 
-import com.example.ticketnow.repo.UserRepository;
+import com.example.ticketnow.repository.UserRepository;
 import com.example.ticketnow.bo.UserBO;
 import com.example.ticketnow.model.User;
 import com.example.ticketnow.model.ValidationMessage;
@@ -8,6 +8,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.Base64;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -43,6 +44,7 @@ public class UserServiceImpl implements UserService {
                     validationMessage=new ValidationMessage(true);
                     validationMessage.setUserId(recordInDatabase.getUserId());
                     validationMessage.setUsername(recordInDatabase.getUsername());
+                    validationMessage.setRoles(recordInDatabase.getRoles());
                     return validationMessage;
             } else if (userBO.getUserId().equals(recordInDatabase.getUserId())==false) {
                 validationMessage = new ValidationMessage();

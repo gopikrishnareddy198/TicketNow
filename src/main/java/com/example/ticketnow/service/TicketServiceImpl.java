@@ -2,12 +2,10 @@ package com.example.ticketnow.service;
 
 import com.example.ticketnow.bo.TikcetBO;
 import com.example.ticketnow.model.Ticket;
-import com.example.ticketnow.repo.TicketRepository;
+import com.example.ticketnow.repository.TicketRepository;
 import com.example.ticketnow.util.TicketStatus;
-import com.fasterxml.jackson.databind.util.BeanUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
