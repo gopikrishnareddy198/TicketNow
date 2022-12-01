@@ -10,7 +10,7 @@ import java.util.List;
 @Data
 public class TikcetBO {
 
-    @JsonIgnore
+    //@JsonIgnore
     private String ticketId;
     private String title;
     private String description;

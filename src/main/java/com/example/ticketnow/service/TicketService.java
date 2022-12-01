@@ -13,5 +13,5 @@ public interface TicketService {
 
     boolean deleteTicket(String ticketId);
 
-    Ticket editTicket();
+    Ticket editTicket(TikcetBO tikcetBO);
 }

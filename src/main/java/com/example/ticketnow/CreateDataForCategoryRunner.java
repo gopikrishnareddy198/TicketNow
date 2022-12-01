@@ -15,6 +15,7 @@ public class CreateDataForCategoryRunner implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
+/*
 
         Category category=new Category();
 
@@ -55,6 +56,7 @@ public class CreateDataForCategoryRunner implements CommandLineRunner {
 
 
 
+*/
 
 
 

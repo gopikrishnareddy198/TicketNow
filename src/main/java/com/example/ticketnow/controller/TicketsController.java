@@ -83,10 +83,9 @@ public class TicketsController {
     }
 
 
-    @PatchMapping(value = "/")
-    public Ticket editATicket(){
-
-        return ticketService.editTicket();
+    @PatchMapping(value = "/edit-a-ticket")
+    public Ticket editATicket(@RequestBody TikcetBO tikcetBO){
+        return ticketService.editTicket(tikcetBO);
     }
 
 }

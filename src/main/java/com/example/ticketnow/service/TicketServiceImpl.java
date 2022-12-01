@@ -52,7 +52,7 @@ public class TicketServiceImpl implements TicketService {
 
         ticket = new Ticket();
 
-        BeanUtils.copyProperties(tikcetBO, ticket);
+        BeanUtils.copyProperties(tikcetBO, ticket,"ticketId");
 
         ticket.setCreationTime(LocalDateTime.now());
         ticket.setCreationDate(LocalDate.now());
@@ -87,7 +87,13 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public Ticket editTicket() {
-        return null;
+    public Ticket editTicket(TikcetBO ticketBO) {
+        Ticket ticket;
+
+        ticket=ticketRepository.findByTicketId(ticketBO.getTicketId());
+
+        BeanUtils.copyProperties(ticketBO,ticket,"creationDate","creationTime","IDof_createdBy","idOfComment");
+
+        return ticketRepository.save(ticket);
     }
 }
