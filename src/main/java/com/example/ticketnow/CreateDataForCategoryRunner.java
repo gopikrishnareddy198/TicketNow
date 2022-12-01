@@ -2,12 +2,14 @@ package com.example.ticketnow;
 
 import com.example.ticketnow.model.Category;
 import com.example.ticketnow.repository.CategoryRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 @Component
 public class CreateDataForCategoryRunner implements CommandLineRunner {
 
+    @Autowired
     private CategoryRepository categoryRepository;
 
     @Override

@@ -86,4 +86,8 @@ public class TicketServiceImpl implements TicketService {
         return ticketDeleted;
     }
 
+    @Override
+    public Ticket editTicket() {
+        return null;
+    }
 }

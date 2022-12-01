@@ -83,4 +83,10 @@ public class TicketsController {
     }
 
 
+    @PatchMapping(value = "/")
+    public Ticket editATicket(){
+
+        return ticketService.editTicket();
+    }
+
 }

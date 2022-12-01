@@ -12,4 +12,6 @@ public interface TicketService {
     List<Ticket> getAllTickets();
 
     boolean deleteTicket(String ticketId);
+
+    Ticket editTicket();
 }
