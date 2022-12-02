@@ -2,9 +2,12 @@ package com.example.ticketnow.controller;
 
 
 import com.example.ticketnow.bo.TikcetBO;
+import com.example.ticketnow.model.Chats;
 import com.example.ticketnow.model.Ticket;
+import com.example.ticketnow.repository.ChatsRepository;
 import com.example.ticketnow.service.TicketService;
 import com.example.ticketnow.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +24,7 @@ import java.util.stream.Collectors;
 public class TicketsController {
 
     private TicketService ticketService;
+    @Autowired private ChatsRepository chatsRepository;
 
     public TicketsController(TicketService ticketService) {
         this.ticketService = ticketService;
@@ -88,4 +92,9 @@ public class TicketsController {
         return ticketService.editTicket(tikcetBO);
     }
 
+
+    @GetMapping(value = "/chats")
+    public ResponseEntity<Chats> getChats(@RequestHeader(value = "ticketId") String ticketId){
+        return  new ResponseEntity<Chats>(chatsRepository.findByTicketId(ticketId),HttpStatus.OK);
+    }
 }
