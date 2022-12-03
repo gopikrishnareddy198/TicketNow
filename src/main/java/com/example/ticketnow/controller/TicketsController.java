@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -24,7 +25,8 @@ import java.util.List;
 public class TicketsController {
 
     private TicketService ticketService;
-    @Autowired private ChatsRepository chatsRepository;
+    @Autowired
+    private ChatsRepository chatsRepository;
 
     public TicketsController(TicketService ticketService) {
         this.ticketService = ticketService;
@@ -88,35 +90,38 @@ public class TicketsController {
 
 
     @PatchMapping(value = "/edit-a-ticket")
-    public Ticket editATicket(@RequestBody TikcetBO tikcetBO){
+    public Ticket editATicket(@RequestBody TikcetBO tikcetBO) {
         return ticketService.editTicket(tikcetBO);
     }
 
 
     @GetMapping(value = "/get-chats")
-    public ResponseEntity<Chats> getChats(@RequestHeader(value = "ticketId") String ticketId){
-        return  new ResponseEntity<Chats>(chatsRepository.findByTicketId(ticketId),HttpStatus.OK);
+    public ResponseEntity<Chats> getChats(@RequestHeader(value = "ticketId") String ticketId) {
+        return new ResponseEntity<Chats>(chatsRepository.findByTicketId(ticketId), HttpStatus.OK);
     }
 
     @PostMapping(value = "/add-message")
-    public ResponseEntity<Chats> addNewMessageToATicket(@RequestBody ChatBO chatBO){
+    public ResponseEntity<Chats> addNewMessageToATicket(@RequestBody ChatBO chatBO) {
         Chats chats;
         List<Message> messages;
         MessageBO messageBO;
         Message message;
 
 
-        chats=chatsRepository.findByTicketId(chatBO.getTicketId());
+        chats = chatsRepository.findByTicketId(chatBO.getTicketId());
 
-        messages=chats.getMessages();
-        message=new Message();
-        BeanUtils.copyProperties(chatBO.getMessage(),message);
+        if (chats.getMessages() != null)
+            messages = chats.getMessages();
+        else
+            messages = new ArrayList<>();
+        message = new Message();
+        BeanUtils.copyProperties(chatBO.getMessage(), message);
 
         messages.add(message);
 
         chatsRepository.save(chats);
 
-        return new ResponseEntity<>(chats,HttpStatus.OK);
+        return new ResponseEntity<>(chats, HttpStatus.OK);
 
     }
 }
