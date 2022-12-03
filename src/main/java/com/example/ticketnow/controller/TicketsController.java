@@ -109,7 +109,15 @@ public class TicketsController {
 
 
         chats = chatsRepository.findByTicketId(chatBO.getTicketId());
-//
+        if(chats==null){
+            Message message1=new Message();
+            chats=new Chats();
+            chats.setTicketId(chatBO.getTicketId());
+            BeanUtils.copyProperties(chatBO.getMessage(),message1 );
+            chats.setMessages(List.of(message1));
+            chatsRepository.save(chats);
+
+        }
         if (chats.getMessages() != null)
             messages = chats.getMessages();
         else
