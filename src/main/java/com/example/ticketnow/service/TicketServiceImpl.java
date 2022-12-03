@@ -40,7 +40,7 @@ public class TicketServiceImpl implements TicketService {
         idOfUser = new ArrayList<String>(2);
         idOfUser.add(userId);
 
-        query.addCriteria(Criteria.where("IDof_createdBy").in(userId));
+        query.addCriteria(Criteria.where("IDof_createdBy").in(userId).andOperator(Criteria.where("IDof_assignedTo").in(userId)));
 
         tickets = mongoTemplate.find(query, Ticket.class);
         return tickets;
