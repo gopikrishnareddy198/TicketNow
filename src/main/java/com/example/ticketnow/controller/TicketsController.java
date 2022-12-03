@@ -1,22 +1,22 @@
 package com.example.ticketnow.controller;
 
 
+import com.example.ticketnow.bo.ChatBO;
+import com.example.ticketnow.bo.MessageBO;
 import com.example.ticketnow.bo.TikcetBO;
 import com.example.ticketnow.model.Chats;
+import com.example.ticketnow.model.Message;
 import com.example.ticketnow.model.Ticket;
 import com.example.ticketnow.repository.ChatsRepository;
 import com.example.ticketnow.service.TicketService;
-import com.example.ticketnow.service.UserService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/ticket-now")
@@ -93,8 +93,30 @@ public class TicketsController {
     }
 
 
-    @GetMapping(value = "/chats")
+    @GetMapping(value = "/get-chats")
     public ResponseEntity<Chats> getChats(@RequestHeader(value = "ticketId") String ticketId){
         return  new ResponseEntity<Chats>(chatsRepository.findByTicketId(ticketId),HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/add-message")
+    public ResponseEntity<Chats> addNewMessageToATicket(@RequestBody ChatBO chatBO){
+        Chats chats;
+        List<Message> messages;
+        MessageBO messageBO;
+        Message message;
+
+
+        chats=chatsRepository.findByTicketId(chatBO.getTicketId());
+
+        messages=chats.getMessages();
+        message=new Message();
+        BeanUtils.copyProperties(chatBO.getMessage(),message);
+
+        messages.add(message);
+
+        chatsRepository.save(chats);
+
+        return new ResponseEntity<>(chats,HttpStatus.OK);
+
     }
 }
