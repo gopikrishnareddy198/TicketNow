@@ -116,7 +116,7 @@ public class TicketsController {
             BeanUtils.copyProperties(chatBO.getMessage(),message1 );
             chats.setMessages(List.of(message1));
             chatsRepository.save(chats);
-
+            return new ResponseEntity<>(chats, HttpStatus.OK);
         }
         if (chats.getMessages() != null)
             messages = chats.getMessages();
