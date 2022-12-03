@@ -109,7 +109,7 @@ public class TicketsController {
 
 
         chats = chatsRepository.findByTicketId(chatBO.getTicketId());
-
+//
         if (chats.getMessages() != null)
             messages = chats.getMessages();
         else
