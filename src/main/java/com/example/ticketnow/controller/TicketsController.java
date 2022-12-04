@@ -114,12 +114,12 @@ public class TicketsController {
             chats=new Chats();
             chats.setTicketId(chatBO.getTicketId());
             BeanUtils.copyProperties(chatBO.getMessage(),message1 );
-            chats.setMessages(List.of(message1));
+            chats.setMessage(List.of(message1));
             chatsRepository.save(chats);
             return new ResponseEntity<>(chats, HttpStatus.OK);
         }
-        if (chats.getMessages() != null)
-            messages = chats.getMessages();
+        if (chats.getMessage() != null)
+            messages = chats.getMessage();
         else
             messages = new ArrayList<>();
         message = new Message();
