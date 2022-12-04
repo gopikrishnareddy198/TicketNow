@@ -1,6 +1,7 @@
 package com.example.ticketnow.service;
 
 import com.example.ticketnow.bo.TikcetBO;
+import com.example.ticketnow.model.Category;
 import com.example.ticketnow.model.Ticket;
 import com.example.ticketnow.repository.TicketRepository;
 import com.example.ticketnow.util.TicketStatus;
@@ -33,16 +34,28 @@ public class TicketServiceImpl implements TicketService {
     public List<Ticket> fetchAllTicketsUsingUserId(String userId) {
         List<String> idOfUser;
         Query query;
+        Query query2;
+        Query query3;
         List<Ticket> tickets;
-
+        List<Category> categories;
         query = new Query();
-
+        query2 = new Query();
         idOfUser = new ArrayList<String>(2);
         idOfUser.add(userId);
-
-        query.addCriteria(Criteria.where("IDof_createdBy").in(userId).andOperator(Criteria.where("IDof_assignedTo").in(userId)));
-
+        query.addCriteria(Criteria.where("IDof_createdBy").in(userId));
+        // userid is username
+        query3= new Query();
+        query3.addCriteria(Criteria.where("userId").in(userId));
+        String username="";
+        categories= mongoTemplate.find(query3, Category.class);
+               if (categories.size()!=0){
+                   username=categories.get(0).getUsername();
+               }
+        query2.addCriteria(Criteria.where("IDof_assignedTo").in(username));
+        // IDof_assignedTo
         tickets = mongoTemplate.find(query, Ticket.class);
+        tickets.addAll(mongoTemplate.find(query2, Ticket.class));
+
         return tickets;
     }
 

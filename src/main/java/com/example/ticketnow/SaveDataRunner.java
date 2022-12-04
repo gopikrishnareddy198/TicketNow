@@ -1,9 +1,5 @@
 package com.example.ticketnow;
-
-import com.example.ticketnow.dao.ICommentsDAO;
-import com.example.ticketnow.model.Comment;
 import com.example.ticketnow.model.Ticket;
-import com.example.ticketnow.repository.CommentsRepository;
 import com.example.ticketnow.repository.TicketRepository;
 import com.example.ticketnow.repository.UserRepository;
 import com.example.ticketnow.model.User;
@@ -22,16 +18,11 @@ public class SaveDataRunner implements CommandLineRunner {
 
     @Autowired private TicketRepository ticketRepository;
 
-    @Autowired private CommentsRepository commentsRepository;
-
-    @Autowired  ICommentsDAO  commentsDAO;
-
     @Override
     public void run(String... args) throws Exception {
         Ticket ticket;
         User user,user2;
         String ecodedPassword;
-        List<Comment> commentList;
         Set<String> rolesForGopi,rolesForKhomsun;
 
      /*   user=new User();
