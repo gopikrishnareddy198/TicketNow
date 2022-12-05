@@ -40,11 +40,11 @@ public class UserServiceImpl implements UserService {
 
             BeanUtils.copyProperties(user, recordInDatabase);
 
-            if (recordInDatabase.getPassword() != null) {
+            /*if (recordInDatabase.getPassword() != null) {
                 String decodedPassword =
                         new String(Base64.getDecoder().decode(recordInDatabase.getPassword()));
                 recordInDatabase.setPassword(decodedPassword);
-            }
+            }*/
 
             if (userBO.equals(recordInDatabase)) {
                 validationMessage = new ValidationMessage(true);
@@ -85,7 +85,7 @@ public class UserServiceImpl implements UserService {
 
 
         BeanUtils.copyProperties(userBO, user);
-        user.setPassword(Base64.getEncoder().encode(userBO.getPassword().getBytes()).toString());
+       // user.setPassword(Base64.getEncoder().encode(userBO.getPassword().getBytes()).toString());
         if(category!="User"){
             Category category1;
             category1=new Category();
