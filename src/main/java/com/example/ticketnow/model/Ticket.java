@@ -29,7 +29,6 @@ public class Ticket {
 
     private String IDof_assignedTo;
 
-    private List<String> idOfComment;
     private String category;
 
     @Transient

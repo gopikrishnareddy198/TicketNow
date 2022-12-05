@@ -34,23 +34,23 @@ public class UserServiceImpl implements UserService {
 
             BeanUtils.copyProperties(user, recordInDatabase);
 
-            if(recordInDatabase.getPassword()!=null) {
-               String decodedPassword=
-                new String(Base64.getDecoder().decode(recordInDatabase.getPassword()));
+            if (recordInDatabase.getPassword() != null) {
+                String decodedPassword =
+                        new String(Base64.getDecoder().decode(recordInDatabase.getPassword()));
                 recordInDatabase.setPassword(decodedPassword);
             }
 
             if (userBO.equals(recordInDatabase)) {
-                    validationMessage=new ValidationMessage(true);
-                    validationMessage.setUserId(recordInDatabase.getUserId());
-                    validationMessage.setUsername(recordInDatabase.getUsername());
-                    validationMessage.setRoles(recordInDatabase.getRoles());
-                    return validationMessage;
-            } else if (userBO.getUserId().equals(recordInDatabase.getUserId())==false) {
+                validationMessage = new ValidationMessage(true);
+                validationMessage.setUserId(recordInDatabase.getUserId());
+                validationMessage.setUsername(recordInDatabase.getUsername());
+                validationMessage.setRoles(recordInDatabase.getRoles());
+                return validationMessage;
+            } else if (userBO.getUserId().equals(recordInDatabase.getUserId()) == false) {
                 validationMessage = new ValidationMessage();
                 validationMessage.setUserIdValid(false);
                 validationMessage.setUserId(userBO.getUserId());
-            } else if (userBO.getPassword().equals(recordInDatabase.getPassword())==false) {
+            } else if (userBO.getPassword().equals(recordInDatabase.getPassword()) == false) {
                 validationMessage = new ValidationMessage();
                 validationMessage.setPasswordValid(false);
             } else {
@@ -58,5 +58,18 @@ public class UserServiceImpl implements UserService {
             }
         }
         return validationMessage = new ValidationMessage(false);
+    }
+
+
+    @Override
+    public boolean checkIfTheUserIsPresent(String userid) {
+        Optional<User> optionalUser;
+
+        optionalUser = userRepository.findById(userid);
+
+        if (optionalUser.isPresent())
+            return true;
+        else return false;
+
     }
 }

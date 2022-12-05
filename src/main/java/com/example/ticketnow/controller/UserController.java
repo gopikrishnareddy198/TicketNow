@@ -29,4 +29,12 @@ public class UserController {
             return new ResponseEntity<ValidationMessage>(userService.validateUser(userBO),HttpStatus.OK);
     }
 
+
+    @PostMapping(value = "/validate-user")
+    public ResponseEntity<Boolean> validateUserId(@RequestHeader String userid){
+
+      return   new ResponseEntity<Boolean>(userService.checkIfTheUserIsPresent(userid),HttpStatus.OK);
+
+    }
+
 }

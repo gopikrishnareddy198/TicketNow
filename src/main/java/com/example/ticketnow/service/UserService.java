@@ -7,5 +7,7 @@ public interface UserService {
 
     ValidationMessage validateUser(UserBO userBO);
 
+    boolean checkIfTheUserIsPresent(String userid);
+
 
 }
