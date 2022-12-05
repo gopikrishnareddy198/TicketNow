@@ -7,7 +7,6 @@ import com.example.ticketnow.bo.UserBO;
 import com.example.ticketnow.model.ValidationMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
@@ -42,16 +41,22 @@ public class UserController {
     }
 
     @PostMapping(value = "/add-user")
-    public ResponseEntity<User> signUp(@RequestHeader String isadmin, @RequestBody UserBO userBO){
+    public ResponseEntity<User> signUp(@RequestHeader String isadmin, @RequestHeader String category, @RequestBody UserBO userBO){
 
 
                 if(isadmin.equals("Yes"))
                     userBO.setRoles(Set.of("ROLE_ADMIN"));
                 else if(isadmin.equals("No"))
                     userBO.setRoles(Set.of("ROLE_USER"));
-            return  new ResponseEntity<User>(userService.createUser(userBO),HttpStatus.OK);
+            return  new ResponseEntity<User>(userService.createUserAndCategory(userBO,category),HttpStatus.OK);
 
     }
 
+
+    /*@DeleteMapping(value = "/delete-user")
+    public ResponseEntity<Boolean> deleteAUser(@RequestHeader String userid){
+        userService.deleteUserUsingId(userid);
+    }
+*/
 
 }

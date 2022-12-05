@@ -1,5 +1,7 @@
 package com.example.ticketnow.service;
 
+import com.example.ticketnow.model.Category;
+import com.example.ticketnow.repository.CategoryRepository;
 import com.example.ticketnow.repository.UserRepository;
 import com.example.ticketnow.bo.UserBO;
 import com.example.ticketnow.model.User;
@@ -8,7 +10,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.Base64;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -18,8 +19,11 @@ public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
 
-    public UserServiceImpl(UserRepository userRepository) {
+    private CategoryRepository categoryRepository;
+
+    public UserServiceImpl(UserRepository userRepository, CategoryRepository categoryRepository) {
         this.userRepository = userRepository;
+        this.categoryRepository = categoryRepository;
     }
 
     public ValidationMessage validateUser(UserBO userBO) {
@@ -76,14 +80,41 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    @Override
-    public User createUser(UserBO userBO) {
+    public User createUserAndCategory(UserBO userBO, String category) {
         User user = new User();
 
 
         BeanUtils.copyProperties(userBO, user);
         user.setPassword(Base64.getEncoder().encode(userBO.getPassword().getBytes()).toString());
+        if(category!="User"){
+            Category category1;
+            category1=new Category();
+
+            category1.setCategory(category);
+            category1.setUserId(user.getUserId());
+            category1.setUsername(user.getUsername());
+
+            categoryRepository.save(category1);
+        }
         return userRepository.save(user);
 
+    }
+
+
+    @Override
+    public boolean deleteUserUsingId(String userid) {
+       Optional<User> optionalUser;
+
+        boolean deleted=false;
+        /*try {
+            optionalUser=userRepository.findById(userid);
+           if( optionalUser.isPresent())
+            userRepository.delete();
+            deleted=true;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        */
+        return deleted;
     }
 }

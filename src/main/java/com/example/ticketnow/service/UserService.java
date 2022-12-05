@@ -11,5 +11,7 @@ public interface UserService {
     boolean checkIfTheUserIsPresent(String userid);
 
 
-    User createUser(UserBO userBO);
+    User createUserAndCategory(UserBO userBO, String category);
+
+    boolean deleteUserUsingId(String userid);
 }
