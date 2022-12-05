@@ -1,5 +1,7 @@
 package com.example.ticketnow;
+import com.example.ticketnow.model.Category;
 import com.example.ticketnow.model.Ticket;
+import com.example.ticketnow.repository.CategoryRepository;
 import com.example.ticketnow.repository.TicketRepository;
 import com.example.ticketnow.repository.UserRepository;
 import com.example.ticketnow.model.User;
@@ -17,6 +19,10 @@ public class SaveDataRunner implements CommandLineRunner {
     @Autowired  private UserRepository userRepository;
 
     @Autowired private TicketRepository ticketRepository;
+
+    @Autowired
+    CategoryRepository categoryRepository;
+
 
     @Override
     public void run(String... args) throws Exception {
@@ -112,6 +118,56 @@ public class SaveDataRunner implements CommandLineRunner {
         commentsDAO.getAllCommentsByTicketId(ticket.getTicketId()).forEach(System.out::println);
 
 */
+
+/*
+        Category category=new Category();
+
+        category.setCategory("Software");
+        category.setUsername("Gopi");
+        category.setUserId("gxa30590");
+
+
+        Category category1=new Category();
+
+        category1.setCategory("Hardware");
+        category1.setUsername("Pawan");
+        category1.setUserId("pxa30590");
+
+
+        Category category2=new Category();
+
+        category2.setCategory("Human Resources");
+        category2.setUsername("Swapna");
+        category2.setUserId("sxb30590");
+
+
+        Category category4=new Category();
+
+        category4.setCategory("Hardware");
+
+        category4.setUsername("Toni");
+        category4.setUserId("txa30590");
+
+
+
+        Category category5=new Category();
+
+        category5.setCategory("Software");
+        category5.setUsername("Belinda");
+        category5.setUserId("bxa30590");
+
+
+        categoryRepository.saveAll(List.of(category,category1,category2,category4,category5));*/
+
+
+
+
+
+
+
+
+
+
 
     }
 }
