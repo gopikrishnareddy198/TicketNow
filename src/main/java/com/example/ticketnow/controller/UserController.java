@@ -1,12 +1,16 @@
 package com.example.ticketnow.controller;
 
 
+import com.example.ticketnow.model.User;
 import com.example.ticketnow.service.UserService;
 import com.example.ticketnow.bo.UserBO;
 import com.example.ticketnow.model.ValidationMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Set;
 
 @CrossOrigin
 @RestController
@@ -36,5 +40,18 @@ public class UserController {
       return   new ResponseEntity<Boolean>(userService.checkIfTheUserIsPresent(userid),HttpStatus.OK);
 
     }
+
+    @PostMapping(value = "/add-user")
+    public ResponseEntity<User> signUp(@RequestHeader String isadmin, @RequestBody UserBO userBO){
+
+
+                if(isadmin.equals("Yes"))
+                    userBO.setRoles(Set.of("ROLE_ADMIN"));
+                else if(isadmin.equals("No"))
+                    userBO.setRoles(Set.of("ROLE_USER"));
+            return  new ResponseEntity<User>(userService.createUser(userBO),HttpStatus.OK);
+
+    }
+
 
 }

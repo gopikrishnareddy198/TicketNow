@@ -12,7 +12,7 @@ public class UserBO {
         private String userId;
         private String password;
         private Set<String> roles;
-        @JsonIgnore
+   //     @JsonIgnore
         private String username;
 
         @Override

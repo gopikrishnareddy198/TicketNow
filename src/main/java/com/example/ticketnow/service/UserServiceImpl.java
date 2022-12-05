@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+
+
 public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
@@ -70,6 +72,18 @@ public class UserServiceImpl implements UserService {
         if (optionalUser.isPresent())
             return true;
         else return false;
+
+    }
+
+
+    @Override
+    public User createUser(UserBO userBO) {
+        User user = new User();
+
+
+        BeanUtils.copyProperties(userBO, user);
+        user.setPassword(Base64.getEncoder().encode(userBO.getPassword().getBytes()).toString());
+        return userRepository.save(user);
 
     }
 }

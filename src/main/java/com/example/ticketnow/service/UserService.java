@@ -1,6 +1,7 @@
 package com.example.ticketnow.service;
 
 import com.example.ticketnow.bo.UserBO;
+import com.example.ticketnow.model.User;
 import com.example.ticketnow.model.ValidationMessage;
 
 public interface UserService {
@@ -10,4 +11,5 @@ public interface UserService {
     boolean checkIfTheUserIsPresent(String userid);
 
 
+    User createUser(UserBO userBO);
 }
