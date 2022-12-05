@@ -106,15 +106,16 @@ public class UserServiceImpl implements UserService {
        Optional<User> optionalUser;
 
         boolean deleted=false;
-        /*try {
+        try {
             optionalUser=userRepository.findById(userid);
-           if( optionalUser.isPresent())
-            userRepository.delete();
-            deleted=true;
+           if( optionalUser.isPresent()) {
+               userRepository.delete(optionalUser.get());
+               categoryRepository.deleteAll(categoryRepository.findByUserId(userid));
+               deleted = true;
+           }
         }catch (Exception e){
             e.printStackTrace();
         }
-        */
         return deleted;
     }
 }

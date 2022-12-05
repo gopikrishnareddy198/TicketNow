@@ -53,10 +53,9 @@ public class UserController {
     }
 
 
-    /*@DeleteMapping(value = "/delete-user")
+    @DeleteMapping(value = "/delete-user")
     public ResponseEntity<Boolean> deleteAUser(@RequestHeader String userid){
-        userService.deleteUserUsingId(userid);
+       return new ResponseEntity<>( userService.deleteUserUsingId(userid),HttpStatus.OK);
     }
-*/
 
 }
