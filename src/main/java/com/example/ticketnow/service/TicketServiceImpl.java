@@ -78,7 +78,14 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public List<Ticket> getAllTickets() {
-        return ticketRepository.findAll();
+        List<Ticket> tickets=
+        ticketRepository.findAll();
+        tickets.forEach(ticket -> {
+            ticket.setTicketId(
+            ticket.getTicketId().substring(ticket.getTicketId().length()-4)
+            );
+        });
+       return  tickets;
     }
 
     @Override
