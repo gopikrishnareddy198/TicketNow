@@ -55,7 +55,11 @@ public class TicketServiceImpl implements TicketService {
         // IDof_assignedTo
         tickets = mongoTemplate.find(query, Ticket.class);
         tickets.addAll(mongoTemplate.find(query2, Ticket.class));
-
+        tickets.forEach(ticket -> {
+            ticket.setTicketId(
+                    ticket.getTicketId().substring(ticket.getTicketId().length()-4)
+            );
+        });
         return tickets;
     }
 
